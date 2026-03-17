@@ -35,7 +35,7 @@ export const siteData = {
       gradient: "from-violet-600 via-purple-600 to-indigo-700",
       featured: true,
     },
-    {
+/*    {
       id: "astralis",
       title: "Astralis",
       description:
@@ -56,7 +56,7 @@ export const siteData = {
       live: "https://cibora.vercel.app",
       gradient: "from-emerald-500 via-teal-500 to-cyan-600",
       featured: true,
-    },
+    },*/
     {
       id: "hunterpedia",
       title: "Hunterpedia",
