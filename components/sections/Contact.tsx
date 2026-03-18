@@ -105,7 +105,7 @@ export function Contact() {
               color: "var(--text)",
             }}
           >
-            Hablemos
+            Trabajemos
             <br />
             <span style={{ color: "var(--lime)" }}>juntos</span>
           </h2>

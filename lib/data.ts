@@ -35,7 +35,7 @@ export const siteData = {
       gradient: "from-violet-600 via-purple-600 to-indigo-700",
       featured: true,
     },
-    {
+/*    {
       id: "astralis",
       title: "Astralis",
       description:
@@ -56,7 +56,7 @@ export const siteData = {
       live: "https://cibora.vercel.app",
       gradient: "from-emerald-500 via-teal-500 to-cyan-600",
       featured: true,
-    },
+    },*/
     {
       id: "hunterpedia",
       title: "Hunterpedia",
@@ -147,7 +147,7 @@ export const siteData = {
   },
 
   stats: [
-    { value: 6, suffix: "+", label: "Proyectos" },
+    { value: 4, suffix: "+", label: "Proyectos" },
     { value: 1, suffix: "+", label: "Año exp." },
     { value: 20, suffix: "+", label: "Tecnologías" },
     { value: 100, suffix: "%", label: "Dedicación" },
