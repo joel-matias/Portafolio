@@ -22,22 +22,30 @@ export default function Home() {
         <IntroAnimation onComplete={() => setShowIntro(false)} />
       )}
 
-      <div
-        style={{
-          opacity: showIntro ? 0 : 1,
-          transition: "opacity 0.4s ease",
-        }}
-      >
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Projects />
-          <Skills />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+      {!showIntro && (
+        <div
+          style={{
+            animation: "pageFadeIn 0.4s ease forwards",
+          }}
+        >
+          <Navbar />
+          <main>
+            <Hero />
+            <About />
+            <Projects />
+            <Skills />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
+      )}
+
+      <style>{`
+        @keyframes pageFadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+      `}</style>
     </>
   );
 }

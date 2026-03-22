@@ -7,14 +7,16 @@ export function ThreeScene() {
 
   useEffect(() => {
     if (!mountRef.current) return;
+    if (window.innerWidth < 768) return;
 
     const el = mountRef.current;
-    const isMobile = window.innerWidth < 768;
-    const size = isMobile ? 260 : 420;
-    const particleCount = isMobile ? 600 : 1400;
+    const size = 420;
+    const particleCount = 1400;
 
     let animId: number;
+    let initTimer: ReturnType<typeof setTimeout>;
 
+    initTimer = setTimeout(() => {
     import("three").then((THREE) => {
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
@@ -22,7 +24,7 @@ export function ThreeScene() {
 
       const renderer = new THREE.WebGLRenderer({
         alpha: true,
-        antialias: !isMobile,
+        antialias: true,
         powerPreference: "high-performance",
       });
       renderer.setSize(size, size);
@@ -36,7 +38,6 @@ export function ThreeScene() {
       const colors = new Float32Array(particleCount * 3);
 
       for (let i = 0; i < particleCount; i++) {
-        // Fibonacci sphere placement keeps particles evenly distributed.
         const phi = Math.acos(1 - (2 * (i + 0.5)) / particleCount);
         const theta = Math.PI * (1 + Math.sqrt(5)) * i;
         const noise = (Math.random() - 0.5) * 0.25;
@@ -63,7 +64,7 @@ export function ThreeScene() {
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
       const material = new THREE.PointsMaterial({
-        size: isMobile ? 0.022 : 0.016,
+        size: 0.016,
         vertexColors: true,
         transparent: true,
         opacity: 0.9,
@@ -86,9 +87,7 @@ export function ThreeScene() {
         targetRotX = -((e.clientY - cy) / (rect.height / 2)) * 0.4;
       };
 
-      if (!isMobile) {
-        window.addEventListener("mousemove", onMouseMove, { passive: true });
-      }
+      window.addEventListener("mousemove", onMouseMove, { passive: true });
 
       let time = 0;
       const animate = () => {
@@ -111,9 +110,7 @@ export function ThreeScene() {
 
       const cleanup = () => {
         cancelAnimationFrame(animId);
-        if (!isMobile) {
-          window.removeEventListener("mousemove", onMouseMove);
-        }
+        window.removeEventListener("mousemove", onMouseMove);
         renderer.dispose();
         geometry.dispose();
         material.dispose();
@@ -124,8 +121,10 @@ export function ThreeScene() {
 
       (el as HTMLDivElement & { _cleanup?: () => void })._cleanup = cleanup;
     });
+    }, 2600);
 
     return () => {
+      clearTimeout(initTimer);
       cancelAnimationFrame(animId);
       const cleanup = (el as HTMLDivElement & { _cleanup?: () => void })._cleanup;
       if (cleanup) cleanup();

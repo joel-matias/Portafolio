@@ -103,7 +103,6 @@ export function IntroAnimation({ onComplete }: IntroAnimationProps) {
     const tick = () => {
       if (settled) return;
 
-      // Use softer lift and stronger fall so the bounce feels heavier.
       vy += vy >= 0 ? GRAVITY * FALL_MULTIPLIER : GRAVITY;
       y += vy;
 
@@ -142,16 +141,8 @@ export function IntroAnimation({ onComplete }: IntroAnimationProps) {
       const stretch = Math.min(0.28, speed * 0.008);
       const falling = vy > 0;
 
-      const sy = falling
-        ? 1 + stretch
-        : 1 + stretch * 0.55;
+      const sy = falling ? 1 + stretch : 1 + stretch * 0.55;
       const sx = 1 - stretch * 0.45;
-
-      const glowIntensity = Math.min(1, speed / 30);
-      ball.style.boxShadow = `
-        0 0 ${20 + glowIntensity * 18}px rgba(200,255,0,${0.7 + glowIntensity * 0.25}),
-        0 0 ${50 + glowIntensity * 28}px rgba(200,255,0,${0.35 + glowIntensity * 0.18})
-      `;
 
       setBall(y, sx, sy);
       updateShadow(y);
