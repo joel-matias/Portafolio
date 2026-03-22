@@ -121,7 +121,7 @@ export function ThreeScene() {
 
       (el as HTMLDivElement & { _cleanup?: () => void })._cleanup = cleanup;
     });
-    }, 2600);
+    }, 100);
 
     return () => {
       clearTimeout(initTimer);
